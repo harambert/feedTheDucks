@@ -1,0 +1,150 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Feeder.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Wall.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Sounds/The Crane Dance.WAV" type="AudioStream" id=4]
+[ext_resource path="res://Main.gd" type="Script" id=5]
+[ext_resource path="res://zig_____.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://LabelFeeds2.gd" type="Script" id=7]
+[ext_resource path="res://LabelTimer2.gd" type="Script" id=8]
+[ext_resource path="res://SpawnPoint.tscn" type="PackedScene" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+size = 8
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 6 )
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 160, 128 )
+
+[node name="Feeder" parent="." instance=ExtResource( 2 )]
+position = Vector2( 64, 152 )
+
+[node name="Feeder2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 256, 152 )
+
+[node name="Wall" parent="." instance=ExtResource( 3 )]
+position = Vector2( -4, 96 )
+scale = Vector2( 1, 12 )
+
+[node name="Wall2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 324, 96 )
+scale = Vector2( 1, 12 )
+
+[node name="Wall3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 160, -4 )
+scale = Vector2( 20, 1 )
+
+[node name="Wall4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 164, 184 )
+scale = Vector2( 20, 1 )
+
+[node name="LabelFeeds" type="Label" parent="."]
+margin_left = 8.0
+margin_top = 7.0
+margin_right = 48.0
+margin_bottom = 21.0
+custom_fonts/font = SubResource( 1 )
+text = "feeds:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelFeeds2" type="Label" parent="LabelFeeds"]
+margin_left = 40.0
+margin_right = 80.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 1 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelTimer" type="Label" parent="."]
+margin_left = 140.0
+margin_top = 7.0
+margin_right = 180.0
+margin_bottom = 21.0
+custom_fonts/font = SubResource( 1 )
+text = "score:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelTimer2" type="Label" parent="LabelTimer"]
+margin_left = 40.0
+margin_right = 80.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 1 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="LabelTimer"]
+autostart = true
+
+[node name="LabelGameOver" type="Label" parent="."]
+margin_left = 104.0
+margin_top = 80.0
+margin_right = 221.0
+margin_bottom = 97.0
+custom_fonts/font = SubResource( 2 )
+text = "game over"
+percent_visible = 0.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpawnPoint" parent="." instance=ExtResource( 9 )]
+position = Vector2( 8, 96 )
+
+[node name="SpawnPoint9" parent="." instance=ExtResource( 9 )]
+position = Vector2( 8, 136 )
+
+[node name="SpawnPoint10" parent="." instance=ExtResource( 9 )]
+position = Vector2( 8, 176 )
+
+[node name="SpawnPoint11" parent="." instance=ExtResource( 9 )]
+position = Vector2( 312, 136 )
+
+[node name="SpawnPoint12" parent="." instance=ExtResource( 9 )]
+position = Vector2( 312, 176 )
+
+[node name="SpawnPoint2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 8, 40 )
+
+[node name="SpawnPoint3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 64, 16 )
+
+[node name="SpawnPoint4" parent="." instance=ExtResource( 9 )]
+position = Vector2( 128, 16 )
+
+[node name="SpawnPoint5" parent="." instance=ExtResource( 9 )]
+position = Vector2( 256, 16 )
+
+[node name="SpawnPoint7" parent="." instance=ExtResource( 9 )]
+position = Vector2( 312, 32 )
+
+[node name="SpawnPoint8" parent="." instance=ExtResource( 9 )]
+position = Vector2( 312, 96 )
+
+[node name="SpawnPoint6" parent="." instance=ExtResource( 9 )]
+position = Vector2( 192, 16 )
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = -15.429
+autoplay = true
+[connection signal="timeout" from="LabelTimer/Timer" to="LabelTimer/LabelTimer2" method="_on_Timer_timeout"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
